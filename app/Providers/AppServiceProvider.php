@@ -4,6 +4,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Models\Post;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,10 +29,10 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         // to share data to all view
         // recent_post is a variable
-        View::share('recent_post',\App\Models\Post::orderBy('created_at','DESC')->limit(5)->get()); 
+        View::share('recent_post',Post::orderBy('created_at','DESC')->limit(5)->get()); 
         // to show the post puplular base on view
-        View::share('popular_post',\App\Models\Post::orderBy('views','DESC')->limit(5)->get()); 
+        View::share('popular_post',Post::orderBy('views','DESC')->limit(5)->get()); 
         // for show all categories in header menu
-        View::share('allCategories',\App\Models\Category::orderBy('title','DESC')->get()); 
+        View::share('allCategories',Category::orderBy('title','DESC')->get()); 
     }
 }
